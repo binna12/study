@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>오늘의 집 회원가입</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"> 이렇게 써도 되는거 아닐까? -->
+
+    <link rel="stylesheet" href="css.nomalize.css">
+
+    <style> 
+    
+    body { margin: 30px 30px;  background-color: whitesmokE; font-family: 'Noto Sans KR', sans-serif;} 
+
+           .iconF {
+            background-image: url("https://d1nyaccf3kuclt.cloudfront.net/assets/icon_map/v4/page-login@2x.png");
+            background-size: 350px;
+            background-position: left 0px top -87px;
+            width: 230px;
+            height: 55px;
+            background-repeat: no-repeat;
+            }
+
+            /* 로그인페이지랑 똑같이 p만 되네. 백그라운드 이미지사이즈 왜 자꾸 잡히지 *//* 이미지를 중앙정려하고 싶을때는 어째야할까 */ 
+
+        /* .iconK {
+            background-image: url("https://d1nyaccf3kuclt.cloudfront.net/assets/icon_map/v4/page-login@2x.png");
+            background-size: cover;
+            background-position: left 22px top -81px;
+            background-repeat: no-repeat;
+            width: 327px;
+            height: 50px;  
+            }  */
+
+    /* .iconN {
+            background-image: url("https://d1nyaccf3kuclt.cloudfront.net/assets/icon_map/v4/page-login@2x.png");
+            background-size: 50px;
+            background-position: left 42px top -85px;
+            background-repeat: no-repeat;
+            width: 100px;
+            height: 100px;  
+            } */ 
+
+        .inputitem span { 
+            font-size: 15px; font-weight: 600;  margin-bottom: 13px;
+        }
+        /* 애들은 플레이스홀더 영향을 안 주나? */
+
+        .inputstyle_1 { 
+            width: 300px; height: 33px; border: 1px solid #dbdbdb; border-radius: 4px; 
+            margin-top:7px;  margin-bottom: 16px; color: black;  padding: 5px 5px; text-align: left;
+        }
+
+        .inputitem_wraapper {
+             width: 300px; height: 141px; border: 1px solid #dbdbdb; border-radius: 4px; margin-top: 13px;  margin-bottom: 13PX;
+             padding: 5px 5px; text-align: left; background-color: white;  line-height: 28px; font-size: 13px; color: #757575; font-weight: 300; 
+        }
+
+        .button {
+            width: 312px; height: 52px; border: 0px; border-radius: 4px; background-color:#35C5F0; 
+            margin-top:20px;  margin-bottom: 13px; font-size: 20px; font-weight: 900; color: white;  padding: 5px 5px; text-align: center; letter-spacing: 1px;
+        }
+
+        .loginY {
+            font-size: 14px; color: black; font-weight: 300;  margin-top: 17px;  text-align: center; letter-spacing: 1px;
+        }
+
+        .loginlink {
+            color: black; font-weight: 700; text-decoration: underline; margin-left: 3px; 
+        }
+
+        ::placeholder {
+            
+            font-weight: 500;  font-size: 13px; color #424242; letter-spacing: 1px;
+        }
+
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <span style="font-size: 14px; color: #757575; text-align: left;"> SNS 계정으로도 간편하게 회원가입 가능해요! </span>
+
+    <a href="http://bitly.kr/fDPoFZOEdQEH" target="blank"> <p class="iconF"> </p> </a>   <!-- 와 p 외에 절대 안돼 -->
+    
+    <!-- <a href="http://bitly.kr/X5ipr0oYppH6" target="blank"> <p class="iconK"> 22</p> </a>
+
+    <a href="http://bitly.kr/qyD48AQkwSs" target="blank"> <p class="iconN"> 33</p> </a>  -->
+
+    <div style="border: 1px solid white; width: 300px; margin-left: 1px; margin-bottom: 30px;"></div>
+
+
+    <p style="font-size: 27px; font-weight: 600;"> 오늘의 집 회원가입 <p>
+
+    <div class="inputitem">
+
+        <span > 이메일 </span> <br> 
+        <input type="text" class="inputstyle_1" placeholder="이메일">  <!-- 플레이스홀더 색깔 웨이트에 대해서도 공부하자 셀렉트도 -->
+
+        <span> 비밀번호 </span> <br> 
+        <input type="text" class="inputstyle_1" placeholder="한글 +숫자 8자 이상">
+
+        <span> 비밀번호 확인 </span> <br> 
+        <input type="text" class="inputstyle_1" placeholder="비밀번호 재입력">
+
+        <span> 별명 </span> <br> 
+        <input type="text" class="inputstyle_1"placeholder="별명(한글 2~15자)">
+
+        <span> 약관동의 </span> <br>
+
+    </div>
+
+    <div class="inputitem_wraapper">
+
+        <input type="checkbox" > 전체동의 <br> <!--이것만 볼드하고 싶으명 어찌해야할까 -->
+        <input type="checkbox" > 만 14세 이상입니다 (필수) <br>
+        <input type="checkbox" > 이용약관 (필수) <br>
+        <input type="checkbox" > 개인정보처리방침 (필수) <br>
+        <input type="checkbox" > 이벤트 알림 및 SMS 수신 (선택) <br> 
+
+    </div>
+
+    <input type="button" class="button" value="회원가입 완료">
+
+    <p class="loginY"> 이미 아이디가 있으신가요? 
+    <a href="https://ohou.se/users/sign_in" class="loginlink" target="blank"> 로그인 </a>
+    </p>
+
+    <!-- 둘다 같은 클래스로 쌓여있는데 가까운 클래스가 먹야ㅕ지는건가  -->
+
+
+</body>
+
+
+</html>

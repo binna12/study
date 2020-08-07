@@ -1,0 +1,56 @@
+var confirmComponent = {
+	template: `
+		<div id="confirmLayer" v-if="isShow">
+            <div class="overlay"></div>
+            <div class="confirmBox">
+                <div class="confirmText" v-html="msg"></div>
+                <div class="btnWrap">
+                    <div class="btn cancelBtn" @click="onCancel">취 소</div>
+                    <div class="btn confirmBtn" @click="onOkay">확 인</div>
+                </div>
+            </div>
+        </div>
+	`,
+	data: function() {
+		return {
+			isShow: false,
+			msg: '<span class="bold">[ 상점명 ]</span>의 <span class="bold">주문시간</span>이 <span class="bold">초과</span>되어 <span class="bold">메뉴</span>가 <span class="bold">삭제</span>되었습니다.<br>주문을 계속 진행하시겠어요?',
+			okayFunc: null,
+			cancelFunc: null
+		}
+	}, methods: {
+		onCancel: function() {
+			overFlowChange();
+			this.isShow = false;
+			if(typeof this.cancelFunc !== 'function') return ;
+			this.cancelFunc();
+		},
+		onOkay: function() {
+			overFlowChange();
+			this.isShow = false;
+			if(typeof this.okayFunc !== 'function') return ;
+
+			this.okayFunc();
+		},
+	},
+	mounted: function() {
+		let that = this;
+		vueBus.$on('confirm', function(options) {
+			if(typeof options !== 'object') return console.error('confirm error');
+
+			that.isShow = true;
+			that.msg = options.msg || null;
+			that.okayFunc = options.okayFunc || null;
+			that.cancelFunc = options.cancelFunc || null;
+			overFlowChange();
+		});
+	}
+};
+
+new Vue({
+	name: 'confirmLayer',
+	el: '#confirmLayer',
+	components: {
+		'confirm-component': confirmComponent
+	}
+});

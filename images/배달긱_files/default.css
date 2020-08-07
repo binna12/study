@@ -1,0 +1,377 @@
+/* 사용할 폰트 */
+@font-face { font-family: 'Noto Sans KR'; font-style: normal; font-weight: 100; src: url(../../font/NotoSans-Thin.woff2) format('woff2'), url(../../font/NotoSans-Thin.woff) format('woff'), url(../../font/NotoSans-Thin.otf) format('opentype'); }
+@font-face { font-family: 'Noto Sans KR'; font-style: normal; font-weight: 300; src: url(../../font/NotoSans-Light.woff2) format('woff2'), url(../../font/NotoSans-Light.woff) format('woff'), url(../../font/NotoSans-Light.otf) format('opentype'); }
+@font-face { font-family: 'Noto Sans KR'; font-style: normal; font-weight: 400; src: url(../../font/NotoSans-Regular.woff2) format('woff2'), url(../../font/NotoSans-Regular.woff) format('woff'), url(../../font/NotoSans-Regular.otf) format('opentype'); }
+@font-face { font-family: 'Noto Sans KR'; font-style: normal; font-weight: 500; src: url(../../font/NotoSans-Medium.woff2) format('woff2'), url(../../font/NotoSans-Medium.woff) format('woff'), url(../../font/NotoSans-Medium.otf) format('opentype'); }
+@font-face { font-family: 'Noto Sans KR'; font-style: normal; font-weight: 700; src: url(../../font/NotoSans-Bold.woff2) format('woff2'), url(../../font/NotoSans-Bold.woff) format('woff'), url(../../font/NotoSans-Bold.otf) format('opentype'); }
+@font-face { font-family: 'Noto Sans KR'; font-style: normal; font-weight: 900; src: url(../../font/NotoSans-Black.woff2) format('woff2'), url(../../font/NotoSans-Black.woff) format('woff'), url(../../font/NotoSans-Black.otf) format('opentype'); }
+
+@font-face { font-family: SDMiSaeng; src: url('../../font/sdmisaeng.woff2'); }
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video { margin: 0; padding: 0; border: 0; font-size: 100%; vertical-align: baseline; }
+
+html{
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	-webkit-text-size-adjust: none;
+	-moz-text-size-adjust: none;
+	-ms-text-size-adjust: none;
+
+	--color-white: #fff;
+	--color-lightgray: #e7ecef;
+	--color-text: #272932;
+	--color-grayshadow: #0004;
+	--color-main: #ffb18e;
+	--color-background: #fff6ef;
+	--color-light-main: #ffeee0;
+	--color-sub-main: #ff9667;
+	--color-important: #f55536;
+	--color-line-l: #ffaa66;
+	--color-line-m: #bdbdbd;
+	--color-line-d: #f55536;
+	--color-noblack-text: #6D6A6A;
+	--color-active: #ffb18e;
+	--color-main-layout: linear-gradient(114deg, #ffceb8 3%, #ffb18e 20%, #ffb18e 80%, #ec87e6 106%);
+	--color-main-layout-active: linear-gradient(98deg, #ffceb8, #ffceb8 41%, #ffb18e 93%, #ec87e6 108%);
+	--color-sub-layout: linear-gradient(to right, #ffb18e, #ff9667);
+	--color-bigBtn: linear-gradient(98deg, #ffceb8, #ffb18e 11%, #ffb18e 89%, #ec87e6 108%);
+	--color-smallBtn: linear-gradient(106deg, #ffceb8, #ffb18e 14%, #ffb18e 87%, #ec87e6 106%);
+	--color-smallBtn-active: linear-gradient(122deg, #ffceb8, #ffb18e);
+	--color-chk: linear-gradient(62deg, #ffceb8, #ff6f2e);
+
+	--header-height: 13vw;
+
+	--input-height : 10.1vw;
+	--banne-height : 40vw;
+
+	overflow-x: hidden;
+	font-size: 3.2vw;
+	/* font 기본 사이즈 12px */
+	word-spacing: -0.7px;
+}
+
+body {
+	-webkit-overflow-scrolling:touch;
+	font-family: 'Noto Sans KR';
+	position: relative;
+	background: #ffffff;
+	text-align: left;
+	height: 100vh;
+	list-style: none;
+}
+
+/* 메인 헤더 높이 설정 */
+main {
+  width: 100vw;
+  height: auto;
+  position: relative;
+}
+/* footer가 있을때의 메인 크기를 다르게 해준다 */
+
+footer{
+  width: 100vw;
+  height: 13vw;
+  background-color: #cbcbcb;
+  color: #fff;
+  position: fixed;
+  z-index: 500;
+  bottom: 0;
+  left: 0;
+  font-weight: bolder;
+
+/*    기본 스타일은 flex*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+ol, ul { 
+	list-style: none;
+}
+a, a:link, a:hover, a:active, a:visited  {
+	text-decoration:none; color:unset;
+}
+
+label{ 
+	position: relative;
+}
+button { 
+	outline: none;
+}
+select { 
+	border-radius: 0;
+}
+textarea {
+	resize: vertical;
+	-webkit-resize: vertical;
+	overflow: auto;
+	-webkit-overflow: auto;
+}
+input, div { 
+	box-sizing: border-box; 
+	-webkit-box-sizing: border-box; 
+}
+input, textarea { 
+	border-radius: 0; 
+	-webkit-appearance: none; 
+	border: solid 0.3vw #dbdbdb; 
+}
+input:focus, select:focus, textarea:focus { 
+	outline: #FF9667 solid; 
+}
+input { 
+	padding-left: 1vw;
+}
+input::placeholder { 
+	color: #989898; 
+	font-size: 1.167rem; 
+	padding-left: 1vw; 
+	display: flex; 
+	align-items: center; 
+	line-height: 7vw;
+}
+input::-webkit-input-placeholder { 
+	color: #989898; 
+	font-size: 1.167rem; 
+	padding-left: 1vw; 
+	display: flex; 
+	align-items: center; 
+	line-height: 7vw;}
+input[type="radio"] { 
+	position: absolute; 
+	opacity: 0; 
+	cursor: pointer; 
+}
+.radioMark { 
+	position: absolute; 
+	top: 2.5vw; 
+	left: 0; 
+	width: 3.8vw; 
+	height: 3.8vw; 
+	background-color: #ffffff; 
+	border-radius: 50%; 
+	border: 0.5vw solid #ff9667; 
+}
+.radioMark:after { 
+	content: ""; 
+	position: absolute; 
+	top: 50%; 
+	left: 50%; 
+	transform: translate(-50%, -50%); 
+	width: 2.3vw; 
+	height: 2.3vw; 
+	border-radius: 50%; 
+	background: #ff9667; 
+	display: none; 
+}
+input[type="radio"]:checked ~ span.radioMark { 
+	border: 0.5vw solid #ff9667; 
+}
+input[type="radio"]:checked ~ .radioMark:after { 
+	display: block; 
+}
+
+::-webkit-scrollbar { 
+	display: none; 
+}
+
+/* toast, alert, confirm */
+.btn { 
+	display: inline-block; 
+	border-radius: 2.1vw; 
+	font-weight: 700; 
+	font-size: 2.34rem; 
+	line-height: 1.29; 
+	letter-spacing: -1.12px; 
+	text-align: center; 
+	color: #ffffff; 
+	padding: 2.7vw 8vw; 
+	margin:0 4.5vw; 
+	cursor: pointer;
+}
+.overlay {
+	width: 100vw; 
+	height: 100vh; 
+	opacity: 0.8; 
+	background-color: #000000;
+}
+.disable-selection {
+	-moz-user-select: none; /* Firefox */
+	-ms-user-select: none; /* Internet Explorer */
+	-khtml-user-select: none; /* KHTML browsers (e.g. Konqueror) */
+	-webkit-user-select: none; /* Chrome, Safari, and Opera */
+	-webkit-touch-callout: none; /* Disable Android and iOS callouts*/
+}
+#toastLayer .toastLayer { 
+	position: fixed; 
+	bottom: 10%; 
+	left: 50%; 
+	width:fit-content; 
+	display:flex; 
+	justify-content: center; 
+	align-items: center; 
+	transform:translateX(-50%); 
+	background: #585454; 
+	opacity: 0.8; 
+	border-radius: 1.8vw; 
+	max-width: 85%; 
+	z-index: 800; 
+}
+#toastLayer .toastLayer__box { 
+	width:fit-content; 
+	color: white; 
+	text-align: center; 
+	margin: 2vw 4vw; 
+	font-size: 1.25rem; 
+	line-height: 1.5; 
+}
+#alertLayer { 
+	position: fixed; 
+	top: 0; 
+	left: 0; 
+	z-index: 700;
+}
+#alertLayer .alertBox { 
+	position: fixed; 
+	top:38%; 
+	left:50%; 
+	transform: translate(-50%); 
+	z-index: 800; 
+	text-align: center;
+}
+#alertLayer .alertBox .alertText { 
+	position: relative; 
+	width:88.8vw; 
+	border-radius: 4.2vw; 
+	background-color: #ffffff; 
+	font-weight: 300; 
+	font-size: 1.5rem; 
+	line-height: 1.44; 
+	letter-spacing: -0.72px; 
+	color: #000000; 
+	padding: 8vw 6vw; 
+	margin-bottom: 4.8vw;
+}
+#alertLayer .alertBox .alertText .changeTitle { 
+	position: absolute; 
+	width:55vw; 
+	height: 11.8vw; 
+	top:-12%; 
+	left:50%; 
+	transform: translate(-50%, -12%); 
+	z-index:150; 
+	border-radius: 7vw; 
+	background-color: #ff2a2a; 
+	font-weight: 700; 
+	font-size: 5.6vw; 
+	letter-spacing: -0.92px; 
+	color: #ffffff; 
+	padding: 1.8vw 4vw;
+}
+#alertLayer .alertBox .alertText .changeTitle .cautionIcon { 
+	display: inline-block; 
+	width: 8.5vw; 
+	vertical-align: top; 
+	margin-right: 1vw; 
+}
+
+#alertLayer .alertBox .alertText .bold { 
+	font-weight: 500;
+}
+#alertLayer .alertBox .alertText h6 { 
+	font-weight: 500; 
+	font-size: 1.167rem; 
+	line-height: 1.43; 
+	letter-spacing: -0.56px; 
+	margin-top: 5.6vw;
+}
+#alertLayer .alertBox .btn.confirmBtn { 
+	background-image: linear-gradient(114deg, #ffceb8 3%, #ffb18e 20%, #ffb18e 80%, #ec87e6 106%); 
+}
+#confirmLayer { 
+	position: fixed; 
+	top: 0; 
+	left: 0; 
+	z-index: 700;
+}
+#confirmLayer .confirmBox { 
+	position: fixed; 
+	top:38%; 
+	left:50%; 
+	transform: translate(-50%); 
+	z-index: 800; 
+}
+#confirmLayer .confirmBox .confirmText { 
+	width:88.8vw; 
+	border-radius: 4.2vw; 
+	background-color: #ffffff; 
+	font-weight: 300; 
+	font-size: 1.5rem; 
+	text-align: center; 
+	line-height: 1.44; 
+	letter-spacing: -0.72px; 
+	color: #000000; 
+	padding: 8vw 6vw; 
+	margin-bottom: 4.8vw;
+}
+#confirmLayer .confirmBox .confirmText .bold { 
+	font-weight: 500;
+}
+#confirmLayer .confirmBox .btnWrap {
+	text-align: center;
+}
+#confirmLayer .confirmBox .btnWrap .btn.cancelBtn { 
+	background-color: #585454; 
+}
+#confirmLayer .confirmBox .btnWrap .btn.confirmBtn { 
+	background-image: linear-gradient(114deg, #ffceb8 3%, #ffb18e 20%, #ffb18e 80%, #ec87e6 106%); 
+}
+
+/* utility */
+.btnActivation{ 
+	background-image: linear-gradient(114deg, #ffceb8 3%, #ffb18e 20%, #ffb18e 80%, #ec87e6 106%); 
+	font-weight: 700; 
+}
+.whitespace { 
+	height: 9vw; 
+}
+.whitespace6 { 
+	height: 6vw; 
+}
+.whitespace5 { 
+	height: 5vw; 
+}
+.ellipsis { 
+	overflow: hidden; 
+	text-overflow: ellipsis; 
+	white-space: nowrap; 
+}
+.hidden { 
+	display: none; 
+}
+
+[v-cloak] { 
+	display: none !important; 
+}
+
+/* loading 스피너 */
+/* loading spinner*/
+#loadingContainer{width:100vw;height:100vh;background-color:rgba(249,249,249,0.8);position:fixed;top:0;left:0;z-index:1100}
+#loadingContainer .loadingImgWrap{margin-top:-5vh;width:59.2vw;height:59.2vw;display:flex;justify-content:center;align-items:center;background:url(https://baedalgeek.s3.ap-northeast-2.amazonaws.com/img/loading/loading_bg.svg) no-repeat transparent;background-size:contain;position:relative;z-index:100}
+#loadingContainer .loadingImgWrap img,#loadingContainer .loadingImgWrap object{object-fit:contain;background-color:transparent;position:absolute;transition:all 1s ease-out}
+#loadingContainer .loadingImgWrap .bdg{width:31.5vw;height:15vw;z-index:105;top:19%;animation:bdg 1.3s infinite ease-out;-webkit-animation:bdg 1.3s infinite ease-out}
+#loadingContainer .loadingImgWrap .steam{width:96%;height:96%;top:1%;z-index:105;animation:steamTop 1.3s infinite ease-out;-webkit-animation:steamTop 1.3s infinite ease-out}
+#loadingContainer .loadingImgWrap .burger{width:13.5vw;height:12.5vw;z-index:101;bottom:25.5%;animation:burger 1.3s infinite linear;-webkit-animation:burger 1.3s infinite linear}
+#loadingContainer .loadingImgWrap .shadowBox{width:8vw;height:2.5vw;position:absolute;z-index:105;bottom:16%}
+#loadingContainer .loadingImgWrap .shadowBox .shadow{width:100%;height:100%;border-radius:50%;background-color:#000;opacity:.3;animation:shadow 1.3s infinite ease-out;-webkit-animation:shadow 1.3s infinite ease-out}
+@keyframes bdg{0%{top:19%}50%{top:16.5%;transform:rotate(.001deg)}100%{top:19%}}
+@-webkit-keyframes bdg{0%{top:19%}50%{top:16.5%;transform:rotate(.001deg)}100%{top:19%}}
+@keyframes steamTop{0%{top:.55vw}50%{top:-1.95%;transform:rotate(.001deg)}100%{top:.55vw}}
+@-webkit-keyframes steamTop{0%{top:.55vw}50%{top:-1.95%;transform:rotate(.001deg)}100%{top:.55vw}}
+@keyframes shadow{0%{transform:scale(0.65)}50%{transform:scale(1)}100%{transform:scale(0.65)}}
+@-webkit-keyframes shadow{0%{transform:scale(0.65)}50%{transform:scale(1)}100%{transform:scale(0.65)}}
+@keyframes burger{0%{transform:rotate(0);bottom:24%}50%{bottom:30%}55%{transform:rotate(220deg)}100%{transform:rotate(360deg);bottom:24%}}
+
+
+pre{font-family: "Noto Sans KR";}
+.tel {border-bottom: 1px solid #000000;}

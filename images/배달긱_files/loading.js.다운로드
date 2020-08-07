@@ -1,0 +1,50 @@
+const loadingComponent = {
+	template: `
+	<div v-if="isShow" class="loading col center" id="loadingContainer">
+		<div class="loadingImgWrap">
+			<img src="https://baedalgeek.s3.ap-northeast-2.amazonaws.com/img/loading/loading_steam.svg" class="steam" alt="steam">
+			<img src="https://baedalgeek.s3.ap-northeast-2.amazonaws.com/img/loading/loading_bdg.svg" class="bdg" alt="bdg">
+			<img src="https://baedalgeek.s3.ap-northeast-2.amazonaws.com/img/loading/loading_burger.svg" class="burger" alt="burger">
+			<div class="shadowBox">
+				<div class="shadow center"></div>
+			</div>
+		</div>
+    </div>
+	`,
+	data: function() {
+		return {
+			isShow: false,
+			screenType: null,
+			imageNumber : 1,
+			delayTime : 0,
+			callFunc : null,
+		}
+	},
+	methods: {
+		calls: function() {
+			if(typeof this.callFunc !== 'function') return ;
+			this.callFunc();
+		},
+	},
+	mounted: function() {
+		vueBus.$on('loadingShow', (options) => {
+			this.isShow = true;
+		});
+
+		vueBus.$on('loadingHide',  (options)=> {
+			this.delayTime  = options.delayTime ? options.delayTime : 1000;
+			setTimeout( ()=> {
+				this.isShow = false;
+			}, this.delayTime);
+		});
+	}
+};
+
+new Vue({
+	name: 'loadingLayer',
+	el: '#loadingLayer',
+	components: {
+		loadingComponent
+	}
+});
+

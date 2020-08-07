@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="20.794" height="27.5" viewBox="0 0 20.794 27.5">
+    <defs>
+      <style>
+          #prefix__타원_1952{fill:url(#prefix__radial-gradient)}
+          #prefix__패스_10385-2{fill:url(#prefix__linear-gradient)}
+          .cls-4{filter:url(#prefix___5)}
+          .cls-5{filter:url(#prefix__패스_10385)}
+      </style>
+        <filter id="prefix__패스_10385" width="20.794" height="24.481" x="0" y="2.475" filterUnits="userSpaceOnUse">
+            <feOffset dy="1"/>
+            <feGaussianBlur result="blur" stdDeviation=".5"/>
+            <feFlood flood-color="#715faa" flood-opacity=".6"/>
+            <feComposite in2="blur" operator="in"/>
+            <feComposite in="SourceGraphic"/>
+        </filter>
+        <filter id="prefix___5" width="13" height="23" x="4.336" y="0" filterUnits="userSpaceOnUse">
+            <feOffset dy="1"/>
+            <feGaussianBlur result="blur-2" stdDeviation=".5"/>
+            <feFlood flood-color="maroon" flood-opacity=".4"/>
+            <feComposite in2="blur-2" operator="in"/>
+            <feComposite in="SourceGraphic"/>
+        </filter>
+        <radialGradient id="prefix__radial-gradient" cx=".5" cy=".5" r=".5" gradientUnits="objectBoundingBox">
+            <stop offset="0" stop-opacity=".298"/>
+            <stop offset="1" stop-color="#545454" stop-opacity=".298"/>
+        </radialGradient>
+        <linearGradient id="prefix__linear-gradient" x1=".5" x2=".5" y2="1.299" gradientUnits="objectBoundingBox">
+            <stop offset="0" stop-color="#ffceb8"/>
+            <stop offset=".431" stop-color="#ffb18e"/>
+            <stop offset="1" stop-color="#ec87e6"/>
+        </linearGradient>
+    </defs>
+    <g id="prefix__그룹_5255" data-name="그룹 5255" transform="translate(-783.164 -1058.5)">
+        <ellipse id="prefix__타원_1952" cx="6.5" cy="3" data-name="타원 1952" rx="6.5" ry="3" transform="translate(787 1080)"/>
+        <g class="cls-5" transform="translate(783.16 1058.5)">
+            <path id="prefix__패스_10385-2" d="M136.8 713.516a8.865 8.865 0 0 1-2.605 6.29L127.9 726.1l-6.29-6.29a8.9 8.9 0 1 1 15.188-6.293z" data-name="패스 10385" transform="translate(-117.5 -701.64)"/>
+        </g>
+        <g class="cls-4" transform="translate(783.16 1058.5)">
+            <text id="prefix___5-2" data-name="5" transform="translate(6.84 15.5)" style="fill:#fff;stroke:transparent;font-size:12px;font-family:NotoSansCJKkr-Bold,Noto Sans CJK KR;font-weight:700;letter-spacing:-.04em">
+                <tspan x="0" y="0">5</tspan>
+            </text>
+        </g>
+    </g>
+</svg>

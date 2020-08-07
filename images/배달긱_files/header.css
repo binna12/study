@@ -1,0 +1,210 @@
+main {
+	padding-top: var(--header-height);
+}
+
+header{
+	width: 100vw;
+	height: var(--header-height);
+	background-color: #ffffff;
+	font-size: 1.5rem;
+	/* 항상 상단 고정 */
+	position: fixed;
+	z-index: 500;
+	top:0;
+	left: 0;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-start;
+	box-shadow: 0 0.8vw 1.6vw 0 rgba(0, 0, 0, 0.16);
+}
+
+div.header__row-left {
+	width: 14%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.header__row-left .header-left-btn {
+	/* 전체넓이의 7프로 정도*/
+	width: 70%;
+	height: 70%;
+	overflow: hidden;
+	cursor: pointer;
+}
+.locationConfirm {
+	width: 50.1vw;
+	height: 8vw;
+	line-height: 7vw;
+	border-radius: 4vw;
+	box-shadow: 0 1px 3px 0 rgba(128, 0, 0, 0.6);
+	border: solid 1px rgba(255, 255, 255, 0.5);
+	background-image: linear-gradient(to bottom, #ffceb8, #ffb18e);
+	color: #ffffff;
+	font-size: 1.083rem;
+	text-align: center;
+	text-shadow: 0 1px 2px rgba(128, 0, 0, 0.4);
+	position: absolute;
+	top: 100%;
+	animation: locationConfirm 3s 0.3s 1 ease-in-out;
+	opacity: 0;
+}
+@keyframes locationConfirm {
+	0% { opacity: 0%; }
+	5% { opacity: 100%; }
+	85% { opacity: 100%; }
+	100%{ opacity: 0; }
+}
+.locationConfirm::after {
+	content: "";
+	width: 0;
+	height: 0;
+	border-width: 0 1.5vw 2vw;
+	border-color: #ffceb8 transparent;
+	border-style: solid;
+	position: absolute;
+	top: -2vw;
+	left: 50%;
+	transform: translateX(-50%);
+}
+div.header__row-center{
+	width: 72%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+}
+
+/* 길이가 한정적이기때문에 auto*/
+div.header__row-center .header_title{
+	width: auto;
+	height: 100%;
+	font-weight: 700;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: #000000;
+	white-space: nowrap;
+	position: relative;
+}
+
+div.header__row-center .location_row{
+	width: auto;
+	height: 100%;
+	font-weight: bold;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+div.header__row-center.col .location_row {
+	height: auto;
+	margin-left: 1vw;
+}
+
+div.header__row-center .location_row .roomServiceIcon{
+	width: 5.4vw;
+	height: 4.8vw;
+	margin-right: 1vw;
+}
+
+div.header__row-center .location_row .roomServiceIcon img{
+	height: 100%;
+}
+
+.location_row .location_title{
+	width: auto;
+	font-weight: 700;
+}
+div.header__row-center .location_row .locationTiCol {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+div.header__row-center .address {
+	font-size: 0.84rem;
+	font-weight: 500;
+	margin-bottom: 0.25vw;
+}
+
+.location_row .header-center-btn{
+	width: 6.5vw;
+	height: 6.5vw;
+	margin-left: 0.6vw;
+	overflow: hidden;
+	cursor: pointer;
+}
+
+
+
+div.header__row-right {
+	width: 14%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+
+.header__row-right .header-right-btn {
+	/* 전체넓이의 7프로 정도*/
+	width: 68%;
+	height: 70%;
+	overflow: hidden;
+	cursor: pointer;
+	position: relative;
+}
+
+.header__row-right .header-right-btn .basket{
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	position: relative;
+	display: flex;
+	justify-content: flex-start;
+	align-items: flex-end;
+}
+
+.header__row-right .header-right-btn .icon{
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.header__row-right .header-right-btn .basket span.badgeNumber {
+	position: absolute;
+	top: 0.4vw;
+	right: 0.4vw;
+	color: white;
+	background-color: red;
+	font-weight: 500;
+	/* padding: 5px 5px 5px 5px; */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 50%;
+	font-size: 0.84rem;
+	line-height: 0;
+	width: 3.8vw;
+	height: 3.8vw;
+	box-shadow: 0 0.3vw 0 0 rgba(113, 95, 170, 0.6);
+}
+
+.header__row-right .header-right-btn > div > img{
+	width: 100%;
+}
+
+
+/* actie 효과 */
+
+.header__row-left:active > .header-left-btn{
+	width: 63%;
+	height: 63%;
+}

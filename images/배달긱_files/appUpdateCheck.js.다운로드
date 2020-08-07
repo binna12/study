@@ -1,0 +1,98 @@
+/**
+ * 앱업데이트 관련
+ * dependency
+ * cookieUtil.js, layout.js
+ */
+const appUpdateCheck = (function() {
+	// 강제업데이트할 최소 버전
+	const forceUpdateVersion = {
+		android: '2.3.60',
+		ios: '2.1.2',
+		web: '2.1.0'
+	};
+
+	// 선택업데이트할 최소 버전
+	const selectUpdateVersion = {
+		android: '2.2.3',
+		ios: '2.2.2',
+		web: '2.1.0'
+	};
+
+	const deviceInfoOrigin = cookie.get('deviceInfo');
+	const splitDeviceInfoOrigin = deviceInfoOrigin.split('|');
+
+	const deviceOS = splitDeviceInfoOrigin[0];
+	const deviceVersion = splitDeviceInfoOrigin[1];
+	const redirectUrl = {
+		android: 'market://details?id=com.rollingstones.baedalgeek',
+		ios: 'itms-apps://itunes.apple.com/app/apple-store/id1356486127?mt=8',
+		web: 'https://play.google.com/store/apps/details?id=com.rollingstones.baedalgeek'
+	};
+
+	function _forceUpdate() {
+		location.replace('/forceUpdate');
+	}
+
+	function _selectUpdate() {
+		let selectAppUpdateDate = localStorage.getItem('selectAppUpdateDate');
+		const todayDate = new Date().getDate().toString();
+
+		// 선택업데이트는 하루에 한번씩만 나오게 한다
+		if(todayDate == selectAppUpdateDate) return false;
+
+		localStorage.setItem('selectAppUpdateDate', todayDate);
+
+		vueBus.$emit('confirm', {
+			msg: '최신버전이 있습니다.<br>업데이트 하시겠습니까?',
+			okayFunc() {
+				location.href = redirectUrl[deviceOS];
+			}
+		});
+	}
+
+	function _run() {
+		// 강제 업데이트
+		if(versionCompare(forceUpdateVersion[deviceOS], deviceVersion) === 1) {
+			return _forceUpdate();
+		}
+
+		// 선택업데이트
+		if(versionCompare(selectUpdateVersion[deviceOS], deviceVersion) === 1) {
+			return _selectUpdate();
+		}
+	}
+
+	/**
+	 * 업데이트가 필요한지 여부
+	 * minimumVersion <= deviceVersion 이면 기능을 사용할 수 있는거니까 업데이트가 필요 없음
+	 *
+	 * @param {object} minimumVersion 기능을 수행할 수 있는 최소 버전
+	 * @returns {boolean} true: 업데이트 필요| false: 업데이트 할필요없음
+	 */
+	function isUpdateApp(minimumVersion) {
+		let settings = $.extend({}, forceUpdateVersion, minimumVersion);
+		return versionCompare(settings[deviceOS], deviceVersion) === 1;
+	}
+
+	function confirmAppUpdate(msg) {
+		msg = msg ? msg : '이 기능은 업데이트가 필요합니다.<br>업데이트 하시겠습니까?'
+		vueBus.$emit('confirm', {
+			msg: msg,
+			okayFunc() {
+				location.href = redirectUrl[deviceOS];
+			}
+		});
+	}
+
+	function goAppStore() {
+		window.location.href = redirectUrl[deviceOS];
+	}
+
+	_run();
+
+	return {
+		isUpdateApp,
+		confirmAppUpdate,
+		goAppStore
+	}
+})();

@@ -1,0 +1,58 @@
+var alertComponent = {
+	template: `
+	<div v-if="isShow">
+		<div class="overlay"></div>
+		<div class="alertBox">
+			<div class="alertText">
+				<div class="changeTitle" v-if="title" :style="{backgroundColor: bgColor}"> <%= title %> </div>
+				<div v-html="msg"></div>
+			</div>
+			<div class="btn confirmBtn" @click="onOkay">확 인</div>
+		</div>
+	</div>
+	`,
+	data: function() {
+		return {
+			isShow: false,
+			title: '주문시간 변경',
+			msg: '<b>[ 상점명 ]상점</b> 주문이 <b>마감시간</b>을 <b>초과</b>하여 <b>다음 주문 시간대로 변겅</b>되었습니다.<h6>반드시 수령시간을 확인 후 주문 바랍니다.</h6>',
+			okayFunc: null,
+			fontSize: null,
+			bgColor: null
+		}
+	},
+	methods: {
+		onOkay: function() {
+			this.isShow = false;
+			overFlowChange();
+			if(typeof this.okayFunc !== 'function') return ;
+
+			this.okayFunc();
+		}
+	},
+	mounted: function() {
+
+		vueBus.$on('alert', (options) => {
+			if(typeof options !== 'object') return console.error('alert error');
+			this.isShow = true;
+			this.title = options.title || null;
+			this.msg = options.msg || null;
+			this.fontSize = options.fontSize || null;
+			this.okayFunc = options.okayFunc || null;
+			this.bgColor = options.bgColor || null;
+			overFlowChange();
+		});
+
+
+	}
+};
+
+new Vue({
+	name: 'alertLayer',
+	el: '#alertLayer',
+	components: {
+		'alertComponent': alertComponent
+	}
+});
+
+// vueBus.$emit('alert', '<b>[ 상점명 ]상점</b> 주문이 <b>마감시간</b>을 <b>초과</b>하여 <b>다음 주문 시간대로 변겅</b>되었습니다.<h6>반드시 수령시간을 확인 후 주문 바랍니다.</h6>');

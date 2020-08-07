@@ -1,0 +1,41 @@
+var toastComponent = {
+	template: `
+		<div v-if="isShow" class="toastLayer" style="pointer-events: none;">
+			<div class="toastLayer__box" v-html="msg"></div>
+		</div>
+	`,
+	data: function() {
+		return {
+			msg: '',
+			isShow: false,
+			delay: 4000
+		}
+	},
+	mounted: function() {
+		const that = this;
+		let timeoutHandler = null;
+
+		vueBus.$on('toast', function(msg) {
+			if(!msg) return alert('내용을 입력해주세요');
+
+			if(timeoutHandler) clearTimeout(timeoutHandler);
+
+			that.msg = msg;
+			that.isShow = true;
+
+			timeoutHandler = setTimeout(function() {
+				$(that.$el).fadeOut('fast', function() {
+					that.isShow = false;
+				});
+			}, that.delay);
+		});
+	}
+};
+
+new Vue({
+	name: 'toastLayer',
+	el: '#toastLayer',
+	components: {
+		'toastComponent': toastComponent
+	}
+});

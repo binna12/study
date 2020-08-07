@@ -1,0 +1,168 @@
+new Vue({
+	el: '#locationsManual',
+	name: 'locationsManual',
+	data: function() {
+		return {
+			receiveInfo: [],
+			locationInfos: [],
+			campusMap: null,
+		}
+	},
+	methods: {
+		generateCampusMap: function () {
+			let totalLatitude = 0;
+			let totalLongitude = 0;
+			let hasOwnLatLngLocationInfos = 0;
+
+			for (let v of this.locationInfos){
+				if (+v.latitude > 0 && +v.longitude > 0){
+					totalLatitude += +v.latitude;
+					totalLongitude += +v.longitude;
+					hasOwnLatLngLocationInfos++;
+				}
+			}
+
+			if (totalLatitude === 0 || totalLongitude === 0){
+				//위도 경도 정보가 하나도 없을 경우
+				return vueBus.$emit('alert', { msg:`죄송 합니다. 수령 장소<br>위치 정보가 존재하지 않습니다.<br>관리자에게 문의 해주세요`, okayFunc: () => {
+						location.replace('/Home');
+					}});
+			}
+
+			let mapContainer = document.getElementById('campusMap'); // 지도를 표시할 div
+			let mainMapOption = {
+				center: new kakao.maps.LatLng(totalLatitude / hasOwnLatLngLocationInfos, totalLongitude / hasOwnLatLngLocationInfos), // 지도의 중심좌표
+				level: this.locationInfos[0].campusCode === 'D1' ? 5 : 6 // 지도의 확대 레벨
+			};
+			// 지도를 생성합니다
+			this.campusMap = new kakao.maps.Map(mapContainer, mainMapOption);
+
+			for (let [idx, location] of this.locationInfos.entries()) {
+				// 마커 이미지의 이미지 크기 입니다
+				let imageSize = new kakao.maps.Size(24, 35);
+				let imageSrc = 'https://baedalgeek.s3.ap-northeast-2.amazonaws.com/style/tools/marker_main.svg';
+
+				if ((idx+1) < 31){ // 이미지가 13까지 준비 되어있다
+					imageSrc = `https://baedalgeek.s3.ap-northeast-2.amazonaws.com/style/tools/marker_${idx+1}.svg`;
+				}
+
+				// 마커 이미지를 생성합니다
+				let markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+
+				// 마커를 생성합니다
+				let marker = new kakao.maps.Marker({
+					map: this.campusMap, // 마커를 표시할 지도
+					position: location.latlng, // 마커를 표시할 위치
+					title : location.locationName, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+					image : markerImage // 마커 이미지
+				});
+			}
+		},
+		generateLocationsMap: function () {
+			this.$nextTick(function (v) {
+				for (let [idx, location] of this.locationInfos.entries()){
+					if (this.$refs.hasOwnProperty(location.locationCode)){ // node가 실제로 존재하는지 확인
+						let locationNode = this.$refs[location.locationCode][0];
+						let option = {
+							center: new kakao.maps.LatLng(location.latitude, location.longitude), // 지도의 중심좌표
+							level: 3 // 지도의 확대 레벨
+						}
+
+						let locationMap = new kakao.maps.Map(locationNode, option);
+
+						// 드래그 줌 제어
+						locationMap.setDraggable(false);
+						locationMap.setZoomable(false);
+
+						let imageSrc = '';
+
+						if ((idx+1) < 14){
+							imageSrc = `https://baedalgeek.s3.ap-northeast-2.amazonaws.com/style/tools/marker_${idx+1}.svg`;
+						}else{
+							imageSrc = `https://baedalgeek.s3.ap-northeast-2.amazonaws.com/style/tools/marker_main.svg`;
+						}
+
+						let imageSize = new kakao.maps.Size(24, 35);
+						let markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+
+						let marker = new kakao.maps.Marker({
+							// 지도 중심좌표에 마커를 생성합니다
+							position: locationMap.getCenter(),
+							image: markerImage
+						});
+						// 지도에 마커를 표시합니다
+						marker.setMap(locationMap);
+					}
+				}
+			})
+		},
+		onErrorImg: function (e) {
+			e.target.src = 'https://baedalgeek.s3.ap-northeast-2.amazonaws.com/place/noBuilding.png';
+		},
+		parseDatetime: function (dateTime) {
+			if (typeof dateTime !== 'string' ||dateTime.indexOf(':') === -1){
+				return dateTime;
+			}
+			let time = dateTime.split(':');
+			return `${time[0]}시${time[1]}분`;
+		},
+		showDetail: function (location) {
+			$('html, body').animate({scrollTop: 0}, 200);
+			vueBus.$emit('toast',`상단의 지도를 통해서 확대, 축소한 지도를<br>자세히 보실 수 있습니다.`);
+
+			let level = this.campusMap.getLevel();
+			// 지도 중심을 부드럽게 이동시킵니다
+			// 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+			this.campusMap.setLevel(level - 1);
+			let moveLatLon = new kakao.maps.LatLng(location.latitude, location.longitude);
+			// 지도를 1레벨 내립니다 (지도가 확대됩니다)
+			this.campusMap.panTo(moveLatLon);
+		}
+	},
+	mounted: function () {
+		$.ajax({
+			url: '/Notice/getLocationsManualInfo',
+			type: 'post',
+			dataType: 'json',
+			success: (res) =>{
+				let locationInfos = [];
+				if (res.returnCode !== '1000'){
+					return vueBus.$emit('alert', {msg:'잘못된 접근 입니다.', okayFunc: () => {
+							location.replace('/Home');
+						}});
+				}
+
+				for (let code in res.locationInfos){
+					res.locationInfos[code].latlng = new kakao.maps.LatLng(res.locationInfos[code].latitude, res.locationInfos[code].longitude);
+					res.locationInfos[code].locationCode = code;
+					for (let time of res.locationInfos[code].timeBelt){
+						time.receiveStartTime = this.parseDatetime(time.receiveStartTime);
+						time.receiveEndTime = this.parseDatetime(time.receiveEndTime);
+					}
+					locationInfos.push(res.locationInfos[code]);
+				}
+				locationInfos.sort(function (a,b) {
+					if (a.sortRank < b.sortRank){
+						return 1;
+					}
+					if (a.sortRank > b.sortRank){
+						return -1;
+					}
+					return 0;
+				});
+				for (let rec of res.receiveInfo){
+					rec.minStartTime = this.parseDatetime(rec.minStartTime);
+					rec.maxStartTime = this.parseDatetime(rec.maxStartTime);
+					rec.minEndTime = this.parseDatetime(rec.minEndTime);
+					rec.maxEndTime = this.parseDatetime(rec.maxStartTime);
+					this.receiveInfo.push(rec);
+				}
+
+				this.locationInfos = locationInfos;
+				this.generateCampusMap();
+				this.generateLocationsMap();
+			}
+		});
+	}
+
+});

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>오늘의 집 로그인</title>
+
+    <!-- 바디 사이즈는 어케해야하지?  뭐 동시에 같이 바꿀려면 1.드래그 하고 2. 컨트롤 3.D -->->
+
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet"> 
+
+
+    <link rel="stylesheet" href="css/normalize.css">  
+    <!-- 아까 여기앞에 .css 썼었음 안 써도 무방한데?뭘까-->
+
+
+    <style>
+         body {margin-left: 14px; margin-top: 30px; overflow: hidden; background-color: whitesmokE; font-family: 'Noto Sans KR', sans-serif; font-size: 15px;} 
+
+        .logo {
+            background-image: url("https://d1nyaccf3kuclt.cloudfront.net/assets/icon_map/v4/page-login@2x.png");
+            background-size: 455px;
+            background-position: left 74px top 43px;
+            background-repeat: no-repeat;
+            width: 400px;
+            height: 152px;  
+        }
+
+       .iconf {
+            background-image: url("https://d1nyaccf3kuclt.cloudfront.net/assets/icon_map/v4/page-login@2x.png");
+            background-size: 350px;
+            background-position: left 67px top -85px;
+            background-repeat: no-repeat;
+            width: 400px;
+            height: 280px;  
+        }
+        
+        a :hover {text-decoration: none;}
+
+
+    </style>
+
+
+</head>
+
+<body>
+
+    <!-- 바디 사이즈는 어케해야하지?  -->->
+    <!-- 바디 자체를 중간으로 하고 싶음. sns 계정으로 간편로그인 애들은 중간인데 오히려 애들이 중간이 아닌것처럼 보임 --><!-- 커서 호버랑 커서 포인터 안되는것 같다  -->
+
+
+    <div class="logo"></div>
+
+    <div style="margin-top: -5px;">  </div>
+
+    <input type="text" name="email" placeholder="이메일"  autofocus="autofocus"
+    style="width: 300px; height: 40px; margin-left: 30px; border: 1px solid #dbdbdb;
+    text-align: left; padding: 5px 0px 5px 10px; font-size: 15px; color:black; cursor: default;"> <br>
+
+   <div style="margin-top: 14px;">  </div>
+
+    <input type="text" name="password" placeholder="패스워드"  autofocus="autofocus"
+    style="width: 300px; height: 40px; margin-left: 30px; border: 1px solid #dbdbdb; 
+   text-align: left; padding: 5px 0px 5px 10px; font-size: 15px; color:black; cursor: default;"> 
+
+    <div style="margin-top: 14px;">  </div>
+
+    <input type="button" value="로그인" style="width: 313px; height: 50px; margin-left: 30px; border-radius: 5px;
+    font-size: 20px; font-weight: 600; background-color:#35C5F0; border: 0px; padding: 5px 100px; text-align: center; color: white;" >
+
+    <div style="margin-top: 20px;">  </div>
+
+    <a href="https://ohou.se/users/password/new" style="font-size: 15px; color:#424242; font-weight: bold; margin-left: 75px;"> 비밀번호 재설정 </a>
+
+    <a href="https://ohou.se/normal_users/new" style="font-size: 15px; color:#424242; font-weight: bold; margin-left: 47px;">회원가입</a>
+
+    <div style="margin-top: 50px;">  </div>
+
+    <p style="font-size: 12px; color: #757575; text-align: center;"> SNS 계정으로 간편로그인/회원가입 </p>
+
+    <p class="iconf"></p>
+
+    <!--왜 div로 하니까 안되고 P로 하니까 되지? 정말 의문...-->
+
+    <div style="margin-top: -132px;">  </div>
+
+    <p style="text-align: center; font-size: 19px; color:#424242; font-weight: bold; margin-top: 5px;"  > 비회원 주문 조회하기 </p>
+
+    <div style="margin-top: 25px;">  </div>
+
+    <p style="text-align: center; font-size: 7px; color: darkgrey;" >Bucketplace Inc.All Rights Reserved</p>
+
+
+    <!-- 벨류값하고 플레이스홀더 차이는 뭘까 벨류는 아예 박아버리는걸까?  -->
+
+    <!-- 밑에는 내가 정리한 이론임 나중에 볼라구 -->
+
+    <!-- 1. <input type="text" name="개발서버에만 보이는거" size="40" value="그 안에 들어갈 초기값"> -->
+
+    <!-- 2. <input type="text" name="" size="40" value="Readonly(벨류값입력불가)" readonly> -->
+
+
+    <!-- 3. <input type="text" name="" size="40" value="Disabled (비활성화처리 작동불가)" disabled> -->
+
+
+    <!-- 4. <input type="text" name="" size="40" value="입력폰트 설정"  style="font-size:12pt; color:#ff0000; font-weight:bold;"> -->
+
+
+    <!-- 5. <input type="text" name="" size="40" value="테두리 0px 로 설정"  style="border: 0px;"> -->
+
+
+    <!-- 6. <input type="text" name="" size="40" value="테두리 1px 로 설정" style="border: 1px solid #ff0000;"> -->
+
+
+    <!-- 7. <input type="text" name="" size="40" value="테두리 4개 각각 설정"  style="border-right: #ff0000 1px solid; border-left: #00ff00 1px solid; -->
+    
+        <!-- border-top: #ffff00 1px solid; border-bottom: #0000ff 1px solid;"> -->
+
+    <!-- 8. <input type="text" name="" size="40" value="배경색 회색으로 설정"   style="background-color: #e2e2e2;"> -->
+
+
+    <!-- 9. <input type="text" name="" size="40" value="입력값 오른쪽 정렬" style="text-align: right;"> -->
+    
+
+    <!-- 10. <input type="text" name="" size="40" value="크기 강제 조정" style="height:30px;"> -->
+
+
+    <!-- 11. <input type="text" name="" size="40" value="패딩주기(상:5,우:0,하:0,좌:10)" style="padding:5px 0px 0px 10px;"> -->
+    
+
+<!-- 글자색 바꾸기
+<input type="text" style="color:#ea0000;"  value="해피정닷컴" disabled="disabled" />
+ 
+배경색과 테두리색 바꾸기
+<input type="text" style="background-color:#fff7f7; border:1px solid #ea0000;" value="해피정" />
+ 
+테두리 안보이도록 바꾸기
+<input type="text" style="border:0px; background-color:transparent;" value="해피정닷컴" /> -->
+<!--  
+
+
+
+Input Box 속성
+ style에 대해서 레츠기릿 
+
+    < value= 박스안에 들어갈 초기값
+text-align          인풋박스 안의 텍스트 정렬
+width               인풋박스의 넓이
+height              인풋박스 높이
+letter-spacing   텍스트 자간 글씨
+background-color:transparent 백그라운드 투명하게  -->
+
+
+     <!-- border:0px; - 외곽선 속성을 0으로 셋팅
+     width= ;    - 가로 넓이
+     height= ;   - 세로 길기
+     background-color: ; - 배경색 속성
+     color: ;            -   글자색 속성
+     background-image:url('이미지 경로/이미지 파일명');    - 텍스트 상자안에 이미지 삽입
+     background-position:0px 0px;    - 이미지 표시 위치
+     text-align:center;  - 텍스트 정렬
+     ime-mode:active     - 한글 기본, 한/영변환 자유로움
+              inactive   - 영문기본, 한/영변환 자유로움
+              auto       - 한글/영문 중 선택된 mode
+              disabled   - 영문기본, 영문/숫자만 입력가능
+     font-family:돋움;
+     font-size:12px;
+     border-style:solid;
+     border-bottom: #B5B6B5 1px solid;
+     border-left: #B5B6B5 1px solid;
+     border-right: #B5B6B5 1px solid;
+     border-top: #B5B6B5 1px solid; 
+     padding-right:3px;
+     padding-top:2px; -->
+
+
+</body>
+
+
+</html>

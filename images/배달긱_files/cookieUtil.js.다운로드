@@ -1,0 +1,52 @@
+var cookie = (function() {
+	let initOptions = {domain: 'baedalgeek.com', path: '/', expires: 0};
+
+	function get(_name) {
+		let value = document.cookie.match('(^|;) ?' + _name + '=([^;]*)(;|$)');
+		return value? decodeURIComponent(value[2]) : null;
+	}
+
+	function set(_name, _value, _options) {
+		_options = _options ? _options : initOptions;
+		if (!_name) return false;
+		if (_value === null || _value === '') _options.expires = -1; // delete cookie
+
+		let expires = initOptions.expires;
+		if (_options.expires && (typeof _options.expires == 'number' || _options.expires.toUTCString)) {
+			let date = _options.expires;
+			if (typeof _options.expires == 'number') {
+				date = new Date();
+				date.setTime(date.getTime() + (_options.expires * 1000));
+			} else {
+				date = _options.expires;
+			}
+			expires = '; expires=' + date.toUTCString(); // use expires attribute, max-age is not supported by IE
+		}
+		let path = '; path=' + (_options.path ? _options.path : initOptions.path);
+		let domain = '; domain=' + (_options.domain ? _options.domain : initOptions.domain);
+		let secure = _options.secure ? '; secure' : '';
+		document.cookie = [_name, '=', _value, expires, path, domain, secure].join('');
+	}
+
+	function clear() {
+		let cookies = document.cookie.split(';');
+
+		let date = new Date();
+		date.setTime(date.getTime() + (-1 * 24 * 60 * 60 * 1000));
+
+		let expires = '; expires=' + date.toUTCString();
+		let path = initOptions.path ? '; path=' + (initOptions.path) : '';
+		let domain = initOptions.domain ? '; domain=' + (initOptions.domain) : '';
+		let secure = initOptions.secure ? '; secure' : '';
+		let value = '';
+
+		for(let i=0; i < cookies.length; i++) {
+			let name = cookies[i].split('=')[0];
+			document.cookie = [name, '=', value, expires, path, domain, secure].join('');
+		}
+	}
+
+	return {
+		get, set, clear
+	};
+})();

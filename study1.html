@@ -1,0 +1,96 @@
+<html>
+    <head>
+        <title>내 프로필 작성하기</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+        <style>
+            body { position: relative; }
+            /* 왜 이 바디포지션은 릴레티브 줬을까? */
+            .space-wapper { height: 15px;}
+            .profile_wapper { padding-left: 20px; padding-right: 20px; padding-top: 5px; }
+            .layout {margin-left: 20px; margin-top: 20px; margin-top: 5px;}
+            .title {font-size: 28px; font-weight: bold; margin-top: 20px;}
+            .sub { font-weight: bolder; width: 80px; display: inline-block;}
+            .good { width: 250px; height: 30px;}
+            .submit { width: 250px; height: 40px; margin-left: 50px; font-size: 15px; font-weight: bold;}
+            .seegood {width: 250; height: 30px;}
+            .seegoodd {width: 20; height: 20px;}
+            .touch {width: 20px; height: 20px; position: relative; top: 4px;}
+            .floating { width: 70px; height: 70px; position: fixed; bottom: 0px; right: 0px; padding: 10px;}
+        </style>
+    </head>
+
+    <body>
+        <div class="profile_wapper">
+
+            <p class="title">내 프로필을 작성해주세요</p>
+
+            <span class="sub">이름</span>
+            <!-- 왜 스판일까? -->
+            <input class="good" type="text" name="user_name" placeholder="이름을 입력해주세요" value="">
+            
+            <div class="space-wapper"></div>
+
+
+            <span class="sub">닉네임</span>
+            <input class="good" type="text" name="user_nickname" placeholder=" 닉네임을 입력해주세요" value="">
+            <div class="space-wapper"></div>
+
+            <span class="sub">성별</span>
+            <input class="touch" type="radio" name="user_sex" value="m"> 남자
+            <input class="touch" type="radio" name="user_sex" value="f"> 여자
+            <div class="space-wapper"></div>
+
+            <span class="sub">성혼유형</span>
+            <input class="touch" type="radio" name="user_type" value="first"> 결혼
+            <input class="touch" type="radio" name="user_type" value="twice"> 재혼
+            <div class="space-wapper"></div>
+
+            <span class="sub">선호지역</span>
+            <input class="touch" type="checkbox" name="user_likeregion" value="seoul"> 서울
+            <input class="touch" type="checkbox" name="user_likeregion" value="gwangju"> 광주
+            <br><br>
+
+            <button type="submit" class="submit">프로필 등록하기</button>
+        </div>
+
+        <br>
+
+        <img src="images/33.png" alt="" class="floating">
+
+
+        <div class="layout">
+
+        <p class="title">내 프로필을 작성해주세요</p>
+
+        <span class="sub">이름</span> 
+        <input class="seegood" type="text" name="dfsd" placeholder="이름을 입력해주세요" value="">
+        <p></p>
+
+        <span class="sub">닉네임</span>   
+        <input class="seegood" type="text" name="slrl" placeholder="닉네임을 입력해주세요" value="">
+        <p></p>
+
+        <span class="sub">성별</span>
+        <input class="seegoodd" type="radio" name="rery" value="m">남자 
+        <input class="seegoodd" type="radio" name="rery" value="F">여자
+        <p></p>
+
+        <span class="sub">지역</span>
+        <input class="seegoodd" type="checkbox" name="user_likeregion" value="gwangju"> 광주
+        <input class="seegoodd" type="checkbox" name="user_likeregion" value="gwangju"> 서울
+        <p></p>
+
+        <button type="submit" class="submit">프로필 등록하기</button>
+       
+        </div>
+
+        <div>
+            <!-- 주석하는 방법 -->
+            1. 커서를 원하는 줄로 움직인다
+            2. ctrl + ?
+        </div>
+        
+
+    </body>
+</html>

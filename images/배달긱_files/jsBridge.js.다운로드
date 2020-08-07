@@ -1,0 +1,79 @@
+/**
+ * 자바스크립트 브릿지
+ *
+ * USAGE
+ * - 등록
+ * jsBridge.register('kakaoLogin', function(token) { })
+ * - 네이티브 호출
+ * jsBridge.call('kakaoLogin')
+ * - 네이티브에서 자바스크립트 콜할때
+ * jsBridge.obj.kakaoLogin(<accessToken>);
+ *
+ * dependency
+ * cookieUtil.js, appUpdateCheck.js
+ */
+const jsBridge = (function() {
+	// public
+	let obj = {};
+
+	// nativeCall
+	function call(name) {
+		const result = _canCall(name);
+
+		if(result.returnCode === '1000') {
+			location.href = `bridge://${name}`;
+		} else if(result.returnCode === '6000') { // 아무것도 하지않음
+
+		} else if(result.returnCode === '6001') { // 컨펌창을 띄움
+			appUpdateCheck.confirmAppUpdate();
+		} else if(result.returnCode === '6002') { // 토스트만 띄움
+			vueBus.$emit('toast', result.msg);
+		}
+	}
+
+	// 네이브가 콜할놈
+	function register(name, callback) {
+		obj[name] = callback;
+	}
+
+	/**
+	 * 호출할 수 있는지 여부
+	 * @param name
+	 * @returns {{msg: string, returnCode: string}}
+	 * @private
+	 *
+	 * returnCode
+	 * 6000: 아무것도 수행하지 않는다
+	 * 6001: 컨펌창을 띄워서 업데이트 페이지로 안내한다
+	 * 6002: 토스트만 띄움
+	 */
+	function _canCall(name) {
+		const deviceInfo = cookie.get('deviceInfo');
+		const os = deviceInfo.split('|')[0];
+
+		if(os === 'web') return { returnCode: '6000',  msg: '웹에서는 실행 할 수 없는 기능입니다' };
+
+		if(name === 'kakaoLogin') { // 카카오 로그인
+			const isUpdateApp = appUpdateCheck.isUpdateApp({ android: '2.2.3', ios: '2.2.2' });
+			if(isUpdateApp == true) return { returnCode: '6001', msg: '앱 업데이트가 필요합니다' };
+		} else if(name === 'kakaoChannelChat') { // 카카오 채널
+			const isUpdateApp = appUpdateCheck.isUpdateApp({ android: '2.3.60', ios: '2.3.1' });
+			if(isUpdateApp == true) return { returnCode: '6001', msg: '앱 업데이트가 필요합니다' };
+		} else if(name == 'scriptReady') {
+			const isUpdateApp = appUpdateCheck.isUpdateApp({ android: '2.3.64', ios: '2.3.4' });
+			if(isUpdateApp == true) return { returnCode: '6000', msg: '앱 업데이트가 필요합니다' };
+		}
+
+		return { returnCode: '1000',  msg: '성공' };
+	}
+
+	return {
+		call, register, obj
+	}
+})();
+
+// 푸시 받을때 처리
+jsBridge.register('pushReceiver', (json) => {
+	let data = JSON.parse(json);
+	if (data.link) location.href = data.link;
+});

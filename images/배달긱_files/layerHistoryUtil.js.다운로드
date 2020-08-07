@@ -1,0 +1,42 @@
+let layerHistoryUtil = (function() {
+	let historyBackFunctions = [];
+	let autoHash = 1;
+
+	let HASH_NAMESPACE = 'layerHistory';
+
+	/**
+	 * 히스토리 스택에 깊이를 반환한다
+	 *
+	 * @returns {number} 스택 깊이
+	 */
+	function getDepth() {
+		return historyBackFunctions.length;
+	}
+
+	function register(_func, _hashName = null) {
+		if(typeof _func !== 'function') return false;
+
+		if (_hashName) {
+			var hashName = '#' + _hashName;
+		} else {
+			var hashName = '#' + HASH_NAMESPACE + autoHash;
+			autoHash = autoHash + 1;
+		}
+
+		historyBackFunctions.push(_func);
+		history.pushState('', '', hashName);
+	}
+
+	$(window).on('hashchange', function() {
+		if(location.hash.indexOf('#'+HASH_NAMESPACE) === '-1') return false;
+		if(historyBackFunctions.length === 0) return false;
+
+		let func = historyBackFunctions.pop();
+		func();
+	});
+
+	return {
+		getDepth: getDepth,
+		register: register
+	};
+}());

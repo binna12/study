@@ -1,0 +1,59 @@
+let supervisorComponent = {
+	template:
+		`<div style="position:fixed; left:5px; bottom:15vw; z-index: 1000">
+			<select style="text-align-last: center;" v-model="selectedBaseUrl">
+				<option v-for="devUrl in devUrls" :value="devUrl.url"><%=devUrl.owner%></option>
+			</select>
+<!--			<button @click="onAnt">ant</button>-->
+<!--			<button @click="onSync">sync</button>-->
+		</div>`,
+	data: function () {
+		return {
+			selectedBaseUrl: window.location.host,
+			devUrls: [{'owner': 'Real', 'url': 'm.baedalgeek.com'},
+				{'owner': 'master', 'url': 'dev-master.baedalgeek.com'},
+				{'owner': 'nine', 'url': 'dev-nine.baedalgeek.com'},
+				{'owner': 'goodman', 'url': 'dev-goodman.baedalgeek.com'},
+				{'owner': 'minismart', 'url': 'dev-minismart.baedalgeek.com'},
+				{'owner': 'cyj', 'url': 'dev-cyj.baedalgeek.com'}
+			]
+		}
+	},
+	watch: {
+		selectedBaseUrl: function () {
+			console.log(this.selectedBaseUrl);
+			window.location.href = '//' + this.selectedBaseUrl;
+		}
+	},
+	methods: {
+		onAnt: function () {
+			$.ajax({
+				type: 'post',
+				datatype: 'json',
+				url: '/Api/antBuildAction',
+				success: function (rtnVal) {
+					alert(rtnVal);
+				}
+			});
+		},
+		onSync: function() {
+			$.ajax({
+				type: 'post',
+				datatype: 'json',
+				url: '/Api/syncAction',
+				success: function (rtnVal) {
+					alert(rtnVal)
+				}
+			});
+		}
+	}
+}
+
+// 루트 인스턴스 생성
+new Vue({
+	name: 'supervisorLayer',
+	el: '#supervisorLayer',
+	components: {
+		supervisorComponent: supervisorComponent
+	}
+})
